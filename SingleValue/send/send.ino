@@ -15,8 +15,8 @@ void loop() {
 void sensorRead(){
   //value = map(analogRead(0),0, 1023, 0, 255);
   value++;
-  //Serial.println(value%256);
-  Serial.print(value%256);
-  Serial.print('\r');
-  Serial.print('\n');
+  Serial.println(value%256);
+  //Serial.print(value%256);
+  //Serial.print('\r');
+  //Serial.print('\n');
 }

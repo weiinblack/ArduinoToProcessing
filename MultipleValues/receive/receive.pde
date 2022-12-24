@@ -1,7 +1,7 @@
 import processing.serial.*;
 Serial myPort;
 String receiveStr;
-int value;
+int values[] = {0,0,0};
 
 void setup() {
   size(200,200);
@@ -10,19 +10,22 @@ void setup() {
   }
   String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600);
-
+  myPort.clear();
 }
 
 void draw() {
-  background(value);
+  background(values[0],values[1],values[2]);
   if(myPort.available() >0){
     try{
       receiveStr = myPort.readStringUntil('\n'); 
-      if(receiveStr !=null)
-        value = Integer.valueOf(receiveStr.trim());
+      if(receiveStr !=null){
+        String tempArray[] = split(receiveStr.trim(),',');
+        if(tempArray.length == 3)
+          values = int(tempArray);
+      }
     }catch(Exception e){
         println("error:" +e);
     }
   }
-  println(value);
+  println(values[0],values[1],values[2]);
 }
